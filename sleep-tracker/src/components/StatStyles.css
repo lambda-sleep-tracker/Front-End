@@ -6,10 +6,28 @@
     display: flex;
 }
 
+h1 {  color: white; margin: 0; }
+
 .sidebar {
     width: 100px;
     height: 100vh;
-    background-color: orange;
+    padding-top: 100px;
+    background-color: grey;
+}
+
+.icon-box {
+    padding: 10px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid grey;
+
+}
+
+.statAwesome {
+    color:white;
+}
+
+.statAwesome:hover {
+    color: lightgrey;
 }
 
 .stats-main-container {
@@ -17,18 +35,28 @@
     /* background-color: red; */
 }
 
+.stats-nav {
+    height: 65px;
+    padding: 0 20px 0 20px;
+    border-bottom: 1px solid white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+
+}
+
 .stats-main {
     width: 95%;
     height: 75%;
     margin: auto;
-    background-color: lightslategray;
+    background-color: grey;
 }
 
 .stats-bottom-section {
     width: 95%;
     height: 200px;
     margin: auto;
-    
-    background-color: lightslategrey;
+    background-color: grey;
     
 }
