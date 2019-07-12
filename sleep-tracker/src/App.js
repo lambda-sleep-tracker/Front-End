@@ -1,13 +1,16 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import LoginForm from './components/login-form';
+import LandingPage from './components/LandingPage';
+import LoginForm from './components/LoginForm';
+
 
 function App() {
   return (
     <div className="App">
-      <p>Hello World!</p>
-      <LoginForm/>
+      {/* <p>Hello World!</p> */}
+      <LandingPage/>
+      {/* <LoginForm/> */}
     </div>
   );
 }
