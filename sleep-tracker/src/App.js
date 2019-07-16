@@ -10,7 +10,7 @@ function App() {
     <div className="App">
       {/* <p>Hello World!</p> */}
       <LandingPage/>
-      {/* <LoginForm/> */}
+      <LoginForm/>
     </div>
   );
 }

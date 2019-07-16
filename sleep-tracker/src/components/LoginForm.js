@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 class LoginForm extends React.Component {
   state = {
@@ -16,9 +17,20 @@ class LoginForm extends React.Component {
     })
   }
 
-  userSignIn = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
+
+    const endpoint = 'dummyUrl'
+
+    axios
+      .post(endpoint, this.state)
+      .then (res => {
+        localStorage.setItem('jwt', res.data.token)
+        console.log(res)
+      })
+      .catch(error => console.log(error))
   }
+
 
   render() {
     console.log(this.state)
@@ -26,7 +38,7 @@ class LoginForm extends React.Component {
         <div>
           <h1>Login</h1>
 
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <input
               onChange={this.inputChange}
               type='text'
@@ -39,8 +51,10 @@ class LoginForm extends React.Component {
               name='username'
               placeholder='Password'
             />
-            <button onClick={this.userSignIn}></button>
+            <button>Sign In</button>
+            <button>Create Account</button> 
           </form>
+
         </div>
       )
     };
