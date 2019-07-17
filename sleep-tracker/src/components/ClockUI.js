@@ -5,9 +5,10 @@ class ClockUI extends React.Component {
   state = {
     user: [
       {
-        wakeupTime: 0,
-        asleepTime: 1,
-        date: 2,
+        bedtime: 0,
+        waketime: 1,
+        sleepquality: 2,
+        date: 3,
       }
     ]
   };
