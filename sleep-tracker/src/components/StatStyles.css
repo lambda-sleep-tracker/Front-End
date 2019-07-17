@@ -1,0 +1,74 @@
+.stats-container {
+    width: 75%;
+    margin: auto;
+    border-left: 5px solid black;
+    border-right: 5px solid black;
+    display: flex;
+}
+
+h1 {  color: white; margin: 0; }
+
+.sidebar {
+    width: 100px;
+    height: 100vh;
+    padding-top: 100px;
+    background-color: grey;
+}
+
+.icon-box {
+    padding: 10px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid grey;
+
+}
+
+.statAwesome {
+    color:white;
+}
+
+.statAwesome:hover {
+    color: lightgrey;
+}
+
+.stats-main-container {
+    width: 100%;
+    /* background-color: red; */
+}
+
+.stats-nav {
+    height: 65px;
+    padding: 0 20px 0 20px;
+    border-bottom: 1px solid white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+
+}
+
+.stats-main {
+    width: 95%;
+    height: 75%;
+    margin: auto;
+    background-color: grey;
+}
+
+.display-average {
+    width: 300px;
+    margin-top: 20px;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    /* background-color: lightgrey; */
+    padding: 10px;
+}
+
+.stats-bottom-section {
+
+    height: 200px;
+    margin: auto;
+    margin-left: 35px;
+    margin-right: 35px;
+    background-color: grey;
+    
+}
