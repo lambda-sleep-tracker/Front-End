@@ -1,5 +1,5 @@
 chartProps = {
-    data: (PropTypes.object | PropTpes.func).isRequired,
+    data: (PropTypes.object | PropTypes.func).isRequired,
     width: PropTypes.number,
     height: PropTypes.number,
     legend: PropTypes.object,

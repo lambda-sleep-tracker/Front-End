@@ -53,10 +53,22 @@ h1 {  color: white; margin: 0; }
     background-color: grey;
 }
 
+.display-average {
+    width: 300px;
+    margin-top: 20px;
+    margin: auto;
+    display: flex;
+    justify-content: space-evenly;
+    /* background-color: lightgrey; */
+    padding: 10px;
+}
+
 .stats-bottom-section {
-    width: 95%;
+
     height: 200px;
     margin: auto;
+    margin-left: 35px;
+    margin-right: 35px;
     background-color: grey;
     
 }
