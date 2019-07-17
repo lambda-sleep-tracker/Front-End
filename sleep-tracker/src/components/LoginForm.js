@@ -5,7 +5,7 @@ class LoginForm extends React.Component {
   state = {
     user: [
       {
-        username: ' ',
+        email: ' ',
         password: ' ',
       }
     ]
