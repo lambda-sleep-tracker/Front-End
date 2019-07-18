@@ -5,10 +5,12 @@ import LandingPage from './components/LandingPage';
 import LoginForm from './components/LoginForm';
 import ClockUI from './components/ClockUI'
 import axios from 'axios'
+import moment from 'moment'
 
 class App extends React.Component {
   state = {
       user: {
+          username: ' ',
           email:' ',
           password: ' '       
         },
@@ -39,20 +41,44 @@ class App extends React.Component {
       .catch(error => console.log(error))
   }
 
+  //capture current time as a numerical value
+  //set state to that current time 
+  getBedTime = () => {
+    let hour = moment().format('h');
+    let minutes = moment().format('mm');
+    let timeCapture = parseInt(hour + minutes);
+    console.log(timeCapture);
 
-  //capture and format the current time
-  getTime = () => {
-    let currentTime = new Date(),
-      hours = currentTime.getHours(),
-      minutes = currentTime.getMinutes();
-
-      console.log(hours, minutes);
-
-      let clockTime = (hours + " : " + minutes);
-      console.log(clockTime)
-
-      this.setState({[this.state.user.wakeupTime]: clockTime})
+    console.log(this.state.sleeptimes.bedtime);
+    this.setState({
+      sleeptimes: {...this.state.sleeptimes, bedtime: timeCapture}
+    })
   }
+
+  getWakeTime = () => {
+    let hour = moment().format('h');
+    let minutes = moment().format('mm');
+    let timeCapture = parseInt(hour + minutes);
+    console.log(timeCapture);
+
+    this.setState({
+      sleeptimes: {...this.state.sleeptimes, waketime: timeCapture}
+    })
+    console.log(this.state.sleeptimes.waketime);
+  }
+
+  // getTime = () => {
+  //   let currentTime = new Date(),
+  //     hours = currentTime.getHours(),
+  //     minutes = currentTime.getMinutes();
+
+  //     console.log(hours, minutes);
+
+  //     let clockTime = (hours + " : " + minutes);
+  //     console.log(clockTime)
+
+  //     this.setState({[this.state.user.wakeupTime]: clockTime})
+  // }
 
   render() {
     return (
@@ -60,7 +86,7 @@ class App extends React.Component {
         {/* <p>Hello World!</p> */}
         <LandingPage inputChange={this.inputChange} handleSubmit={this.handleSubmit}/>
         <LoginForm/>
-        <ClockUI getTime={this.getTime}/>
+        <ClockUI getBedTime={this.getBedTime} getWakeTime={this.getWakeTime}/>
         <Stats />
       </div>
     );
