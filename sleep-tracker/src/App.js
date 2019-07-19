@@ -82,6 +82,18 @@ class App extends React.Component {
         </div>
       );
     }
+
+    else {
+      return (
+        <div className="App">
+        {/* <p>Hello World!</p> */}
+        <Route exact path="/" component={LandingPage}/>
+        <Route exact path="/login" render={props => <LoginForm {...props} inputChange={this.inputChange} handleSubmit={this.handleSubmit}/>}/>
+        <Route exact path="/home" render={props => <LoginForm {...props} inputChange={this.inputChange} handleSubmit={this.handleSubmit}/>}/>
+        <Route exact path="/stats" render={props => <LoginForm {...props} inputChange={this.inputChange} handleSubmit={this.handleSubmit}/>}/>
+      </div>
+      )
+    }
   }
 }
 

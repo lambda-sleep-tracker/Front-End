@@ -1,8 +1,11 @@
 import React from 'react'
+import Sidebar from './Sidebar';
+import './loginForm.css'
 
 function LoginForm(props) {
     return (
-        <div>
+        <div className='loginFormContainer'>
+        <Sidebar/>
           <h1>Login</h1>
           <form onSubmit={props.handleSubmit}>
             <input

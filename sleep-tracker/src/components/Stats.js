@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Chart from './Chart';
 import StatStyles from './StatStyles.css';
+import Sidebar from './Sidebar';
 // import 'sleep-tracker/public/assets/css/material-kit.css';
 
 class Stats extends Component {
@@ -41,30 +42,7 @@ class Stats extends Component {
     render() {
         return (
             <div className="stats-container" >
-                <div className="sidebar">
-                    <div className="icon-box">
-                        <a href="#">
-                            <i className="fas fa-cloud-moon fa-3x statAwesome"></i>
-                        </a>
-                    </div>
-                    <div className="icon-box">
-                        <i className="fas fa-chart-area fa-3x statAwesome"></i>
-                    </div>
-                    <div className="icon-box">
-                        <i className="fas fa-pencil-alt fa-3x statAwesome"></i>
-                    </div>
-                    <div className="icon-box">
-                        <a href="#">
-                            <i className="fas fa-trash fa-3x statAwesome"></i>
-                        </a>
-                    </div>
-                    <div className="icon-box">
-                        <a href="#">
-                            <i className="fas fa-cog fa-3x statAwesome"></i>
-                        </a>
-                    </div>
-
-                </div>
+            <Sidebar/>
                 <div className="stats-main-container">
                     <div className="stats-main">
                         <div className="stats-nav">
