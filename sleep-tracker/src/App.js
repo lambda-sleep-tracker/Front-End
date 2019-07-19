@@ -71,15 +71,17 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        {/* <p>Hello World!</p> */}
-        <Route exact path="/" component={LandingPage}/>
-        <Route exact path="/login" render={props => <LoginForm {...props} inputChange={this.inputChange} handleSubmit={this.handleSubmit}/>}/>
-        <Route exact path="/home" render={props => <ClockUI {...props} getBedTime={this.getBedTime} getWakeTime={this.getWakeTime}/>}/>
-        <Route exact path="/stats" component={Stats}/>
-      </div>
-    );
+    if (this.state.user.isLoggedIn) {
+      return (
+        <div className="App">
+          {/* <p>Hello World!</p> */}
+          <Route exact path="/" component={LandingPage}/>
+          <Route exact path="/login" render={props => <LoginForm {...props} inputChange={this.inputChange} handleSubmit={this.handleSubmit}/>}/>
+          <Route exact path="/home" render={props => <ClockUI {...props} getBedTime={this.getBedTime} getWakeTime={this.getWakeTime}/>}/>
+          <Route exact path="/stats" component={Stats}/>
+        </div>
+      );
+    }
   }
 }
 
