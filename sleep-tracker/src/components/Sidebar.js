@@ -21,12 +21,9 @@ function Sidebar() {
         </Link>
       </div>
       <div className="icon-box">
-        <i className="fas fa-pencil-alt fa-3x statAwesome" />
-      </div>
-      <div className="icon-box">
-        <a href="#">
-          <i className="fas fa-trash fa-3x statAwesome" />
-        </a>
+        <Link to="/about">
+          <i className="fas fa-address-card fa-3x statAwesome" />
+        </Link>
       </div>
       <div className="icon-box">
         <a href="#">

@@ -1,0 +1,46 @@
+
+.team-h1 { color: grey; margin-bottom: 50px; }
+.team-p { width: 800px; margin: auto; }
+
+.team {
+	width: 75%;
+	margin: auto;
+	padding-top: 100px;
+}
+
+.team-container {
+	width: 75%;
+	margin: auto;
+	display: flex;
+	padding: 35px;
+	justify-content: center;
+	flex-flow: row wrap;
+}
+
+.team-box {
+	background-image: linear-gradient(lightgrey, grey);
+	/* background-color: grey; */
+	width: 400px;
+	margin: 35px;
+	padding: 20px;
+	text-align: center;
+	/* border-radius: 25px; */
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+.team-box img {
+	margin: auto;
+}
+
+.github {
+	font-size: 25px;
+}
+
+.responsive {
+	width: 180px;
+	height: 180px;
+	border-radius: 50%;
+	border: solid 6px lightgrey;
+}

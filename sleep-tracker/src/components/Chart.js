@@ -22,7 +22,7 @@ class Chart extends Component {
     render() {
         return (
             <div className="chart">
-                <Polar
+                <Bar
                     data={this.state.chartData}
                     options={{
                         title: {
