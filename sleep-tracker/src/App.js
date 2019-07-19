@@ -7,14 +7,15 @@ import ClockUI from './components/ClockUI'
 import axios from 'axios'
 import moment from 'moment'
 import { Route } from 'react-router-dom';
+import About from './components/About';
 
 class App extends React.Component {
   state = {
+      isLoggedIn: true,
       user: {
           username: ' ',
           email:' ',
-          password: ' ',
-          isLoggedIn: true, 
+          password: ' ', 
           user_id: 1,
         },
        sleeptimes:{
@@ -25,6 +26,12 @@ class App extends React.Component {
         }  
   };
 
+  componentDidMount(){
+    axios
+      .get('https://lambda-sleep-tracker.herokuapp.com/api/users/')
+      .then(res => this.setState({user: res.data[1]}), console.log('Users successfully grabbed'))   
+  }
+
   //input handlers
   inputChange = event => {
     this.setState({
@@ -32,9 +39,21 @@ class App extends React.Component {
     })
   }
 
-  handleSubmit = event => {
+  handleRegistrationSubmit = event => {
     event.preventDefault();
-    const endpoint = 'dummyUrl'
+    const endpoint = 'https://lambda-sleep-tracker.herokuapp.com/api/auth/register';
+    axios
+      .post(endpoint, this.state)
+      .then (res => {
+        localStorage.setItem('jwt', res.data.token)
+        console.log(res)
+      })
+      .catch(error => console.log(error))
+  }
+
+  handleSignInSubmit = event => {
+    event.preventDefault();
+    const endpoint = 'https://lambda-sleep-tracker.herokuapp.com/api/auth/login';
     axios
       .post(endpoint, this.state)
       .then (res => {
@@ -70,14 +89,15 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.user.isLoggedIn) {
+    if (this.state.isLoggedIn) {
       return (
         <div className="App">
           {/* <p>Hello World!</p> */}
           <Route exact path="/" component={LandingPage}/>
           <Route exact path="/login" render={props => <LoginForm {...props} inputChange={this.inputChange} handleSubmit={this.handleSubmit}/>}/>
           <Route exact path="/home" render={props => <ClockUI {...props} getBedTime={this.getBedTime} getWakeTime={this.getWakeTime}/>}/>
-          <Route exact path="/stats" component={Stats}/>
+          <Route exact path="/stats" render={props => <Stats {...props} userName={this.state.user.username}/>}/>
+          <Route exact path="/about" component={About}/>
         </div>
       );
     }
@@ -90,6 +110,7 @@ class App extends React.Component {
         <Route exact path="/login" render={props => <LoginForm {...props} inputChange={this.inputChange} handleSubmit={this.handleSubmit}/>}/>
         <Route exact path="/home" render={props => <LoginForm {...props} inputChange={this.inputChange} handleSubmit={this.handleSubmit}/>}/>
         <Route exact path="/stats" render={props => <LoginForm {...props} inputChange={this.inputChange} handleSubmit={this.handleSubmit}/>}/>
+        <Route exact path="/about" component={About}/>
       </div>
       )
     }
