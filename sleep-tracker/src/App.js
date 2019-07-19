@@ -15,6 +15,7 @@ class App extends React.Component {
           email:' ',
           password: ' ',
           isLoggedIn: true, 
+          user_id: 1,
         },
        sleeptimes:{
           bedtime: 0,
@@ -59,15 +60,13 @@ class App extends React.Component {
   }
 
   getWakeTime = () => {
+    // const value = e.target.value;
     let hour = moment().format('h');
     let minutes = moment().format('mm');
     let timeCapture = parseInt(hour + minutes);
-    console.log(timeCapture);
-
     this.setState({
       sleeptimes: {...this.state.sleeptimes, waketime: timeCapture}
     })
-    console.log(this.state.sleeptimes.waketime);
   }
 
   render() {
