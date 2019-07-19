@@ -6,13 +6,15 @@ import LoginForm from './components/LoginForm';
 import ClockUI from './components/ClockUI'
 import axios from 'axios'
 import moment from 'moment'
+import { Route } from 'react-router-dom';
 
 class App extends React.Component {
   state = {
       user: {
           username: ' ',
           email:' ',
-          password: ' '       
+          password: ' ',
+          isLoggedIn: true, 
         },
        sleeptimes:{
           bedtime: 0,
@@ -50,6 +52,7 @@ class App extends React.Component {
     console.log(timeCapture);
 
     console.log(this.state.sleeptimes.bedtime);
+    // this.setState({[this.state.sleeptimes.bedtime]: timeCapture}) this setState didnt work, why?
     this.setState({
       sleeptimes: {...this.state.sleeptimes, bedtime: timeCapture}
     })
@@ -67,27 +70,14 @@ class App extends React.Component {
     console.log(this.state.sleeptimes.waketime);
   }
 
-  // getTime = () => {
-  //   let currentTime = new Date(),
-  //     hours = currentTime.getHours(),
-  //     minutes = currentTime.getMinutes();
-
-  //     console.log(hours, minutes);
-
-  //     let clockTime = (hours + " : " + minutes);
-  //     console.log(clockTime)
-
-  //     this.setState({[this.state.user.wakeupTime]: clockTime})
-  // }
-
   render() {
     return (
       <div className="App">
         {/* <p>Hello World!</p> */}
-        <LandingPage inputChange={this.inputChange} handleSubmit={this.handleSubmit}/>
-        <LoginForm/>
-        <ClockUI getBedTime={this.getBedTime} getWakeTime={this.getWakeTime}/>
-        <Stats />
+        <Route exact path="/" component={LandingPage}/>
+        <Route exact path="/login" render={props => <LoginForm {...props} inputChange={this.inputChange} handleSubmit={this.handleSubmit}/>}/>
+        <Route exact path="/home" render={props => <ClockUI {...props} getBedTime={this.getBedTime} getWakeTime={this.getWakeTime}/>}/>
+        <Route exact path="/stats" component={Stats}/>
       </div>
     );
   }
