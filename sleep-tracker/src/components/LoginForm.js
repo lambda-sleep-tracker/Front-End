@@ -7,12 +7,12 @@ function LoginForm(props) {
         <div className='loginFormContainer'>
         <Sidebar/>
           <h1>Login</h1>
-          <form onSubmit={props.handleSubmit}>
+          <form onSubmit={props.handleSignInSubmit}>
             <input
               onChange={props.inputChange}
               type='text'
-              name='username'
-              placeholder='Username'
+              name='email'
+              placeholder='Email'
             />
             <input
               onChange={props.inputChange}
@@ -21,9 +21,29 @@ function LoginForm(props) {
               placeholder='Password'
             />
             <button>Sign In</button>
-            <button>Create Account</button> 
           </form>
 
+          <form onSubmit={props.handleRegistrationSubmit}>
+            <input
+              onChange={props.inputChange}
+              type='text'
+              name='email'
+              placeholder='Email'
+            />
+             <input
+              onChange={props.inputChange}
+              type='text'
+              name='username'
+              placeholder='username'
+            />
+            <input
+              onChange={props.inputChange}
+              type='password'
+              name='username'
+              placeholder='Password'
+            />
+            <button>Create Account</button> 
+          </form>
         </div>
       )
     };
