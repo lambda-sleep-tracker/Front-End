@@ -45,7 +45,7 @@ class ClockUI extends React.Component {
           <button className="bedTimeBtn" onClick={this.props.getBedTime}>
             <i className="far fa-moon" />
           </button>
-          <button className="wakeupBtn" value="wakeupBtn" onClick={e => this.props.getWakeTime}>
+          <button className="wakeupBtn" value="wakeupBtn" onClick={this.props.getWakeTime}>
             <i className="fas fa-sun" />
           </button>
         </div>

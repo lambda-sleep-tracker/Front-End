@@ -1,13 +1,13 @@
-import React from 'react';
-import './App.css';
-import Stats from './components/Stats';
-import LandingPage from './components/LandingPage';
-import LoginForm from './components/LoginForm';
-import ClockUI from './components/ClockUI'
-import axios from 'axios'
-import moment from 'moment'
-import { Route } from 'react-router-dom';
-import About from './components/About';
+import React from "react";
+import "./App.css";
+import Stats from "./components/Stats";
+import LandingPage from "./components/LandingPage";
+import LoginForm from "./components/LoginForm";
+import ClockUI from "./components/ClockUI";
+import axios from "axios";
+import moment from "moment";
+import { Route } from "react-router-dom";
+import About from "./components/About";
 
 class App extends React.Component {
   state = {
@@ -15,8 +15,8 @@ class App extends React.Component {
     user: {
       email: " ",
       username: " ",
-      password: " "
-      // user_id: 1,
+      password: " ",
+      user_id: null,
     },
     sleeptimes: {
       bedtime: 0,
@@ -95,7 +95,8 @@ class App extends React.Component {
     let minutes = moment().format("mm");
     let timeCapture = parseInt(hour + minutes);
     console.log(timeCapture);
-
+    let now = moment();
+    console.log(now)
     console.log(this.state.sleeptimes.bedtime);
     // this.setState({[this.state.sleeptimes.bedtime]: timeCapture}) this setState didnt work, why?
     this.setState({
