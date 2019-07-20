@@ -17,7 +17,7 @@ function LoginForm(props) {
             <input
               onChange={props.inputChange}
               type='password'
-              name='username'
+              name='password'
               placeholder='Password'
             />
             <button>Sign In</button>

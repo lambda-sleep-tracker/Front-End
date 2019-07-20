@@ -13,10 +13,10 @@ class App extends React.Component {
   state = {
     isLoggedIn: true,
     user: {
-      email: " ",
       username: " ",
+      email: " ",
       password: " ",
-      user_id: null,
+      // user_id: null,
     },
     sleeptimes: {
       bedtime: 0,
@@ -34,9 +34,15 @@ class App extends React.Component {
 
   //input handlers
   inputChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
+    console.log(event.target.value)
+    this.setState(
+      {
+        user: {
+          ...this.state.user,
+          [event.target.name]: event.target.value
+
+      }
+    }, () => console.log(this.state));
   };
 
   handleRegistrationSubmit = event => {
