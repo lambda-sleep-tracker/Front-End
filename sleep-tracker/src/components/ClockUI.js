@@ -38,16 +38,26 @@ class ClockUI extends React.Component {
         <Sidebar />
         <div className="clockUIContent">
           <div className="clockFace">
-
             <p id="clockDisplay">{moment().format('hh:mm:ss a')}</p>
-
           </div>
-          <button className="bedTimeBtn" onClick={this.props.getBedTime}>
+
+          <div className="clockFormContainer">
+            <form>
+              <input type="button" name="bedtime" onClick={this.props.getBedTime}></input>
+              <input type="button" name="waketime" onClick={this.props.getWakeTime}></input>
+              <div className="checkboxContainer">
+                <input type="checkbox" name="sleepquality" value="1" onClick={this.props.sleepTimeSubmitHandler}></input>
+                <input type="checkbox" name="sleepquality" value="2" onClick={this.props.sleepTimeSubmitHandler}></input>
+                <input type="checkbox" name="sleepquality" value="3" onClick={this.props.sleepTimeSubmitHandler}></input>
+              </div>
+            </form>
+          </div>
+          {/* <button className="bedTimeBtn" onClick={this.props.getBedTime}>
             <i className="far fa-moon" />
           </button>
           <button className="wakeupBtn" value="wakeupBtn" onClick={this.props.getWakeTime}>
             <i className="fas fa-sun" />
-          </button>
+          </button> */}
         </div>
       </div>
     );

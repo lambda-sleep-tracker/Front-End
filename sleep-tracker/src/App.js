@@ -12,17 +12,17 @@ import About from "./components/About";
 class App extends React.Component {
   state = {
     isLoggedIn: true,
+    userId: null,
     user: {
       username: " ",
       email: " ",
       password: " ",
-      // user_id: null,
     },
     sleeptimes: {
-      bedtime: 0,
-      waketime: 1,
-      sleepquality: 2,
-      date: 3
+      bedtime: null,
+      waketime: null,
+      sleepquality: null,
+      date: null
     }
   };
 
@@ -39,10 +39,9 @@ class App extends React.Component {
       {
         user: {
           ...this.state.user,
-          [event.target.name]: event.target.value
-
+          [event.target.name]: event.target.value,
       }
-    }, () => console.log(this.state));
+    });
   };
 
   handleRegistrationSubmit = event => {
@@ -73,53 +72,60 @@ class App extends React.Component {
       console.log(result);
       const token = result.data.authToken;
       localStorage.setItem("token", token);
-
+      this.setState({isLoggedIn:true, userId: result.data.userId})
       // this.props.history.push('/users');
     } catch (err) {
       console.error(err);
     }
-    // event.preventDefault();
-    // const user = {email: this.state.user.email, password: this.state.user.password};
-    // // const { email, password } = this.state.user;
-    // console.log(user);
-    // const endpoint = 'https://lambda-sleep-tracker.herokuapp.com/api/auth/login';
-    // axios
-    //   .post(endpoint, user)
-    //   .then (res => {
-    //     console.log(res.data)
-    //     const token = res.data.authToken;
-    //     console.log(token);
-    //     localStorage.setItem('jwt', token);
-    //   })
-    //   .catch(error => console.log(error))
   };
 
-  //capture current time as a numerical value
-  //set state to that current time
+  //capture sleep time and date as string
+  //capture awake time as date and string
+  //capture sleep rating 1-3 as value
+  //post all data simultaneously to endpoint
+  // getTime = event => {
+  //   event.preventDefault();
+  //   return moment().format('LLL')
+  // }
   getBedTime = () => {
-    let hour = moment().format("h");
-    let minutes = moment().format("mm");
-    let timeCapture = parseInt(hour + minutes);
-    console.log(timeCapture);
-    let now = moment();
-    console.log(now)
-    console.log(this.state.sleeptimes.bedtime);
-    // this.setState({[this.state.sleeptimes.bedtime]: timeCapture}) this setState didnt work, why?
+    let bedtime = moment().format('LLL')
     this.setState({
-      sleeptimes: { ...this.state.sleeptimes, bedtime: timeCapture }
-    });
-  };
-
+      sleeptimes: {...this.state.sleeptimes, bedtime: bedtime}
+    })
+    console.log('goodnight at ' + bedtime)
+  }
   getWakeTime = () => {
-    // const value = e.target.value;
-    let hour = moment().format("h");
-    let minutes = moment().format("mm");
-    let timeCapture = parseInt(hour + minutes);
+    let waketime = moment().format('LLL')
     this.setState({
-      sleeptimes: { ...this.state.sleeptimes, waketime: timeCapture }
-    });
-  };
+      sleeptimes: {...this.state.sleeptimes, waketime: waketime}
+    })
+    console.log('goodmorning at ' + waketime)
+  }
 
+  sleepTimeSubmitHandler = event => {
+    const endpoint = 'https://lambda-sleep-tracker.herokuapp.com/api/users/sleeps'
+    console.log(event.target.value)
+    this.setState(
+      {
+        sleeptimes: {
+          ...this.state.sleeptimes,
+          sleepquality: event.target.value,
+          user_id: this.state.userId,
+          date: moment().format('LL')
+      }
+    }, () => console.log(this.state));
+
+    if (this.state.sleeptimes.bedtime != null && this.state.sleeptimes.waketime != null){
+      console.log('success')
+      axios 
+        .post(endpoint, this.state.sleeptimes)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    }
+
+    else console.log('condition not met')
+  };
+  
   render() {
     if (this.state.isLoggedIn) {
       return (
@@ -146,6 +152,7 @@ class App extends React.Component {
                 {...props}
                 getBedTime={this.getBedTime}
                 getWakeTime={this.getWakeTime}
+                sleepTimeSubmitHandler={this.sleepTimeSubmitHandler}
               />
             )}
           />
@@ -171,7 +178,8 @@ class App extends React.Component {
               <LoginForm
                 {...props}
                 inputChange={this.inputChange}
-                handleSubmit={this.handleSubmit}
+                handleSignInSubmit={this.handleSignInSubmit}
+                handleRegistrationSubmit={this.handleRegistrationSubmit}
               />
             )}
           />
@@ -182,7 +190,8 @@ class App extends React.Component {
               <LoginForm
                 {...props}
                 inputChange={this.inputChange}
-                handleSubmit={this.handleSubmit}
+                handleSignInSubmit={this.handleSignInSubmit}
+                handleRegistrationSubmit={this.handleRegistrationSubmit}
               />
             )}
           />
@@ -193,7 +202,8 @@ class App extends React.Component {
               <LoginForm
                 {...props}
                 inputChange={this.inputChange}
-                handleSubmit={this.handleSubmit}
+                handleSignInSubmit={this.handleSignInSubmit}
+                handleRegistrationSubmit={this.handleRegistrationSubmit}
               />
             )}
           />
