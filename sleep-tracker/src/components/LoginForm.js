@@ -7,12 +7,34 @@ function LoginForm(props) {
         <div className='loginFormContainer'>
         <Sidebar/>
           <h1>Login</h1>
-          <form onSubmit={props.handleSubmit}>
+          <form onSubmit={props.handleSignInSubmit}>
             <input
               onChange={props.inputChange}
               type='text'
+              name='email'
+              placeholder='Email'
+            />
+            <input
+              onChange={props.inputChange}
+              type='password'
+              name='password'
+              placeholder='Password'
+            />
+            <button>Sign In</button>
+          </form>
+
+          <form onSubmit={props.handleRegistrationSubmit}>
+            <input
+              onChange={props.inputChange}
+              type='text'
+              name='email'
+              placeholder='Email'
+            />
+             <input
+              onChange={props.inputChange}
+              type='text'
               name='username'
-              placeholder='Username'
+              placeholder='username'
             />
             <input
               onChange={props.inputChange}
@@ -20,10 +42,8 @@ function LoginForm(props) {
               name='username'
               placeholder='Password'
             />
-            <button>Sign In</button>
             <button>Create Account</button> 
           </form>
-
         </div>
       )
     };

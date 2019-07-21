@@ -7,7 +7,7 @@ function Sidebar() {
     <div className="sidebar">
       <div className="icon-box">
         <Link to="/">
-          <i class="fas fa-home fa-3x statAwesome" />
+          <i className="fas fa-home fa-3x statAwesome" />
         </Link>
       </div>
       <div className="icon-box">

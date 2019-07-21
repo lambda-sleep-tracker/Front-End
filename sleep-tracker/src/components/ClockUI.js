@@ -5,37 +5,47 @@ import "./clockUI.css";
 import moment from "moment";
 
 class ClockUI extends React.Component {
+  state = {
+    intervalId: ' ',
+    clockTime: ' ',
+  }
   constructor(props) {
     super(props);
   }
 
   getClockTime() {
-    setInterval(() => {
-      const clock = document.getElementById('clock');
+    return setInterval(() => {
+      const clock = document.getElementById('clockDisplay');
       const now = moment();
       const clockTime = now.format('hh:mm:ss a')
       clock.textContent = clockTime;
-      // console.log(clockTime)
+      this.setState({clockTime})
     }, 1000)
   };
 
-  onSubmit(value) {
-    console.log(value)
+  componentWillUnmount(){
+    clearInterval(this.state.intervalId);
+  }
+
+  componentDidMount(){
+    const intervalId = this.getClockTime();
+    this.setState({intervalId});
   }
 
   render() {
     return (
       <div className="clockUIContainer">
         <Sidebar />
-        {this.getClockTime()}
         <div className="clockUIContent">
           <div className="clockFace">
-            <p id="clock">{moment().format('hh:mm:ss a')}</p>
+
+            <p id="clockDisplay">{moment().format('hh:mm:ss a')}</p>
+
           </div>
           <button className="bedTimeBtn" onClick={this.props.getBedTime}>
             <i className="far fa-moon" />
           </button>
-          <button className="wakeupBtn" value="wakeupBtn" onClick={e => this.props.getWakeTime}>
+          <button className="wakeupBtn" value="wakeupBtn" onClick={this.props.getWakeTime}>
             <i className="fas fa-sun" />
           </button>
         </div>

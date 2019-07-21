@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Sidebar from './Sidebar';
+import './deleteForm.css'
 
 class DeleteForm extends Component {
     constructor(props) {
@@ -25,7 +27,7 @@ class DeleteForm extends Component {
 
     render() {
         return (
-            <div className="DeleteForm">
+            <div className="DeleteFormContainer">
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Sleep Date ID:
