@@ -8,7 +8,7 @@ function LandingPage() {
     <div className="landingPageContainer">
     <Sidebar/>
       <div className="landingPageContent">
-      <p>Hypnos will help you gain a deeper understanding of your own sleeping patterns, and allow you to use those key details to make informed decisions about how much sleep is right for you?</p>
+      <p>Hypnos will help you gain a deeper understanding of your own sleeping patterns, and allow you to use those key details to make informed decisions about how much sleep is right for you.</p>
 
       <h2>Testimonials:</h2>
       <p>"Using Hypnos let me see my children!"<span className="testimonialTitle">- Previously nocturnal man</span></p>

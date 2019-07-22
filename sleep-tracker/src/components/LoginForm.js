@@ -1,6 +1,7 @@
 import React from 'react'
 import Sidebar from './Sidebar';
 import './loginForm.css'
+import {withRouter} from 'react-router-dom'
 
 function LoginForm(props) {
     return (
@@ -48,4 +49,4 @@ function LoginForm(props) {
       )
     };
 
-export default LoginForm
+export default withRouter(LoginForm)
