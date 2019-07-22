@@ -24,6 +24,9 @@ class App extends React.Component {
       waketime: null,
       sleepquality: null,
       date: null
+    },
+    sleepdata: {
+      
     }
   };
 
@@ -161,6 +164,29 @@ class App extends React.Component {
 
     else console.log('condition not met')
   };
+
+  componentDidMount() {
+    this.getSleepData();
+  }
+
+  getSleepData = event => {
+    const endpoint = 'https://lambda-sleep-tracker.herokuapp.com/api/users/sleeps'
+    axios
+      .get(endpoint)
+      .then(res => this.setState({sleepdata: res.data}), console.log(this.state.sleepdata))
+      .catch(err => console.log(err));
+      console.log(this.state.sleepdata)
+  }
+
+  //Uncomment this to test getting sleep entires by User ID
+  // getSleeps = (event) => {
+  //   event.preventDefault()
+  //   this.state.sleepdata.filter(this.displayUserSleep())
+  // }
+
+  // displayUserSleep = () => {
+  //   return this.state.sleepdata.user_id === this.state.userId;
+  // }
   
   render() {
     if (this.state.isLoggedIn) {
@@ -187,6 +213,7 @@ class App extends React.Component {
               <ClockUI
                 {...props}
                 getBedTime={this.getBedTime}
+                getSleeps={this.getSleeps}
                 getWakeTime={this.getWakeTime}
                 sleepTimeSubmitHandler={this.sleepTimeSubmitHandler}
                 getSleepQuality={this.getSleepQuality}
