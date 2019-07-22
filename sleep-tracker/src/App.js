@@ -83,10 +83,7 @@ class App extends React.Component {
   //capture awake time as date and string
   //capture sleep rating 1-3 as value
   //post all data simultaneously to endpoint
-  // getTime = event => {
-  //   event.preventDefault();
-  //   return moment().format('LLL')
-  // }
+
   getBedTime = () => {
     let bedtime = moment().format('LLL')
     this.setState({

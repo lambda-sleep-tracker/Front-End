@@ -43,12 +43,24 @@ class ClockUI extends React.Component {
 
           <div className="clockFormContainer">
             <form>
-              <input type="button" name="bedtime" onClick={this.props.getBedTime}></input>
-              <input type="button" name="waketime" onClick={this.props.getWakeTime}></input>
+              <button type="button" name="bedtime" onClick={this.props.getBedTime}><i class="fas fa-moon"></i></button>
+              <button type="button" name="waketime" onClick={this.props.getWakeTime}><i class="fas fa-sun"></i></button>
               <div className="checkboxContainer">
-                <input type="checkbox" name="sleepquality" value="1" onClick={this.props.sleepTimeSubmitHandler}></input>
-                <input type="checkbox" name="sleepquality" value="2" onClick={this.props.sleepTimeSubmitHandler}></input>
-                <input type="checkbox" name="sleepquality" value="3" onClick={this.props.sleepTimeSubmitHandler}></input>
+              <p>How did you sleep?</p>
+              <label>
+                <input type="checkbox" name="sleepquality" value="1" onClick={this.props.sleepTimeSubmitHandler}/>
+                Could have been better
+              </label>
+              <br/>
+              <label>
+                <input type="checkbox" name="sleepquality" value="2" onClick={this.props.sleepTimeSubmitHandler}/>
+                Well enough
+              </label>
+              <br/>
+              <label>
+                <input type="checkbox" name="sleepquality" value="3" onClick={this.props.sleepTimeSubmitHandler}/>
+                Great! Thanks for asking!
+              </label>
               </div>
             </form>
           </div>
