@@ -26,11 +26,12 @@ class App extends React.Component {
       date: null
     },
     sleepdata: {
-
     },
     userSleepData: {
 
     },
+      
+    }
   };
 
   // componentDidMount(){
@@ -148,13 +149,7 @@ class App extends React.Component {
       });
     console.log(this.state.sleeptimes, 'sleep quality get')
   }
-
-
-
-
-
-
-
+  
   componentDidMount() {
     this.getSleepData();
   }
@@ -196,12 +191,51 @@ class App extends React.Component {
         .catch(err => console.log(err))
       // console.log('success')
       this.displayUserSleep();
+      }
+    });
+    console.log(this.state.sleeptimes, 'sleep quality get')
+  }
+
+  sleepTimeSubmitHandler = event => {
+    event.preventDefault()
+    const endpoint = 'https://lambda-sleep-tracker.herokuapp.com/api/users/sleeps'
+
+    if (this.state.sleeptimes.bedtime != null && this.state.sleeptimes.waketime != null && this.state.sleeptimes.sleepquality !=null){
+      axios 
+        .post(endpoint, this.state.sleeptimes)
+        .then(res => {
+           console.log(res)
+           console.log(this.state.sleeptimes, 'SLEEPTIMES')
+           console.log('BIG SUCCESS')
+          })
+        .catch(err => console.log(err))
+        // console.log('success')
     }
 
     else console.log('condition not met')
   };
 
+  componentDidMount() {
+    this.getSleepData();
+  }
 
+  getSleepData = event => {
+    const endpoint = 'https://lambda-sleep-tracker.herokuapp.com/api/users/sleeps'
+    axios
+      .get(endpoint)
+      .then(res => this.setState({sleepdata: res.data}), console.log(this.state.sleepdata))
+      .catch(err => console.log(err));
+      console.log(this.state.sleepdata)
+  }
+
+  getSleeps = (event) => {
+    event.preventDefault()
+    this.displayUserSleep();
+  }
+
+  displayUserSleep = () => {
+    console.log(this.state.sleepdata.filter(data => data.user_id === this.state.userId));
+  }
   render() {
     if (this.state.isLoggedIn) {
       return (
