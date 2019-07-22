@@ -47,6 +47,7 @@ class ClockUI extends React.Component {
               <button type="button" name="waketime" onClick={this.props.getWakeTime}><i class="fas fa-sun"></i></button>
               <div className="checkboxContainer">
               <p>How did you sleep?</p>
+              {/* Uncomment this to test getting sleep entries by user ID */}
               <label>
                 <input type="button" name="sleepquality" value="1" onClick={this.props.getSleepQuality}/>
                 Could have been better
