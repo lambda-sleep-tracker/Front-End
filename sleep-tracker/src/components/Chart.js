@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ShowSleeps from './ShowSleeps';
 import { Bar, Line, Pie, Bubble, Radar, Scatter, Area, Mixed, Doughnut, Polar, HorizontalBar } from 'react-chartjs-2';
 import { string } from 'prop-types';
 
@@ -8,7 +9,7 @@ class Chart extends Component {
         super(props);
         this.state = {
             chartData: props.chartData,
-            user: 'Chris'
+            user: this.props.user
         }
 
     }
@@ -21,23 +22,24 @@ class Chart extends Component {
 
     render() {
         return (
-            <div className="chart">
-                <Bar
-                    data={this.state.chartData}
-                    options={{
-                        title: {
-                            display: this.props.displayTitle,
-                            // pass in the users name in the stats title 
-                            text: this.state.user + '\'s ' + 'Weekly Sleep Stats',
-                            fontSize: 35
-                        },
-                        legend: {
-                            display: this.props.displayLegend,
-                            position: this.props.legendPosition
-                        }
-                    }}
-                />
-            </div>
+            // <div className="chart">
+            //     <Bar
+            //         data={this.state.chartData}
+            //         options={{
+            //             title: {
+            //                 display: this.props.displayTitle,
+
+            //                 text: 'Your Weekly Sleep Stats',
+            //                 fontSize: 35
+            //             },
+            //             legend: {
+            //                 display: this.props.displayLegend,
+            //                 position: this.props.legendPosition
+            //             }
+            //         }}
+            //     />
+            // </div>
+            <ShowSleeps getSleeps={this.props.getSleeps} userSleepData={this.props.userSleepData} />
         )
     }
 }
