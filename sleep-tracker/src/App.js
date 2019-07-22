@@ -178,15 +178,14 @@ class App extends React.Component {
       console.log(this.state.sleepdata)
   }
 
-  //Uncomment this to test getting sleep entires by User ID
-  // getSleeps = (event) => {
-  //   event.preventDefault()
-  //   this.state.sleepdata.filter(this.displayUserSleep())
-  // }
+  getSleeps = (event) => {
+    event.preventDefault()
+    this.displayUserSleep();
+  }
 
-  // displayUserSleep = () => {
-  //   return this.state.sleepdata.user_id === this.state.userId;
-  // }
+  displayUserSleep = () => {
+    console.log(this.state.sleepdata.filter(data => data.user_id === this.state.userId));
+  }
   
   render() {
     if (this.state.isLoggedIn) {
