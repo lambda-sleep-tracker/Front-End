@@ -3,11 +3,12 @@ import Chart from './Chart';
 import StatStyles from './StatStyles.css';
 import Sidebar from './Sidebar';
 import DeleteForm from './DeleteForm';
-// import 'sleep-tracker/public/assets/css/material-kit.css';
+// import axios from "axios";
+import ShowSleeps from './ShowSleeps';
 
 class Stats extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             chartData: {}
         }
@@ -18,9 +19,9 @@ class Stats extends Component {
     }
 
     getChartData() {
-        // Axios Call goes here
         this.setState({
             chartData: {
+
                 labels: ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'],
                 datasets: [{
                     label: 'Hours Slept',
@@ -52,24 +53,16 @@ class Stats extends Component {
                         </div>
                         <div className="chart-main">
                             {/** Insert Chart component below and passing in the chart data from state */}
-                            <Chart chartData={this.state.chartData} />
-                            <div className="change-chart-buttons">
-
-                            </div>
-                            <div className="display-average">
-                                <div>
-                                    <p>Average Sleep:</p>
-                                </div>
-                                <div>
-                                    {/** here we will pass in the average/best sleep time */}
-                                    <p>7.5 Hours </p>
-                                </div>
-                            </div>
-                        </div>{/* end chart-main */}
+                            <Chart chartData={this.state.chartData} getSleeps={this.props.getSleeps} userSleepData={this.props.userSleepData} />
+                        </div>
                     </div>
                     <div className="stats-bottom-section">
-                        <DeleteForm />
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <div className="showSleeps">
+                            <div className="sleeps-container">
+
+                            </div>
+                        </div>
+                        <div><DeleteForm /></div>
                     </div>
                 </div>
             </div>

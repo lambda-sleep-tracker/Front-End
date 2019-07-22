@@ -8,7 +8,8 @@ import axios from "axios";
 import moment from "moment";
 import { Route } from "react-router-dom";
 import About from "./components/About";
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
+
 
 class App extends React.Component {
   state = {
@@ -26,42 +27,11 @@ class App extends React.Component {
       date: null
     },
     sleepdata: {
-      
+    userSleepData: {
+
+    },      
     }
   };
-
-  // componentDidMount(){
-  //   axios
-  //     .get('https://lambda-sleep-tracker.herokuapp.com/api/users/')
-  //     .then(res => this.setState({user: res.data[1]}), console.log('Users successfully grabbed'))
-  // }
-  // componentDidMount(){
-  //   if(localStorage.getItem('token')){
-  //     handleSignInSubmit = async event => {
-  //       event.preventDefault();
-  //       let userData = localStorage.getItem('userData');
-  //       const { email, password } = userData;
-    
-  //       try {
-  //         const result = await axios.post(
-  //           "https://lambda-sleep-tracker.herokuapp.com/api/auth/login",
-  //           {
-  //             email,
-  //             password
-  //           }
-  //         );
-  //         console.log(result);
-  //         const token = result.data.authToken;
-  //         localStorage.setItem("token", token);
-  //         this.setState({isLoggedIn:true, userId: result.data.userId});
-  //         this.props.history.push('/login')
-  //         // this.props.history.push('/users');
-  //       } catch (err) {
-  //         console.error(err);
-  //       }
-  //     };
-  //   }
-  // }
 
   //input handlers
   inputChange = event => {
@@ -71,8 +41,8 @@ class App extends React.Component {
         user: {
           ...this.state.user,
           [event.target.name]: event.target.value,
-      }
-    });
+        }
+      });
   };
 
   handleRegistrationSubmit = event => {
@@ -106,11 +76,8 @@ class App extends React.Component {
       JSON.parse(userData);
       // console.log(userData['email'])
       localStorage.setItem("token", token);
-      this.setState({isLoggedIn:true, userId: result.data.userId});
-      // this.props.history.push('/login')
-      // this.props.userHasAuthenticated(true);
+      this.setState({ isLoggedIn: true, userId: result.data.userId });
       this.props.history.push("/home");
-      // this.props.history.push('/users');
     } catch (err) {
       console.error(err);
     }
@@ -124,14 +91,14 @@ class App extends React.Component {
   getBedTime = () => {
     let bedtime = moment().format('LLL')
     this.setState({
-      sleeptimes: {...this.state.sleeptimes, bedtime: bedtime}
+      sleeptimes: { ...this.state.sleeptimes, bedtime: bedtime }
     })
     console.log('goodnight at ' + bedtime)
   }
   getWakeTime = () => {
     let waketime = moment().format('LLL')
     this.setState({
-      sleeptimes: {...this.state.sleeptimes, waketime: waketime}
+      sleeptimes: { ...this.state.sleeptimes, waketime: waketime }
     })
     console.log('goodmorning at ' + waketime)
   }
@@ -144,12 +111,38 @@ class App extends React.Component {
           sleepquality: event.target.value,
           user_id: this.state.userId,
           date: moment().format('LL')
-      }
-    });
+        }
+      });
     console.log(this.state.sleeptimes, 'sleep quality get')
   }
 
-  sleepTimeSubmitHandler = event => {
+  componentDidMount() {
+    this.getSleepData();
+  }
+
+  getSleepData = event => {
+    const endpoint = 'https://lambda-sleep-tracker.herokuapp.com/api/users/sleeps'
+    axios
+      .get(endpoint)
+      .then(res => this.setState({ sleepdata: res.data }), console.log(this.state.sleepdata))
+      .catch(err => console.log(err));
+    console.log(this.state, "this.state");
+    console.log(this.state.sleepdata, "sleepdata")
+  }
+
+  getSleeps = (event) => {
+    event.preventDefault()
+    this.displayUserSleep();
+  }
+
+  displayUserSleep = () => {
+    const userSleepData = this.state.sleepdata.filter(data => data.user_id === this.state.userId);
+    this.setState({ userSleepData: userSleepData })
+    console.log(userSleepData, "userSleepData");
+
+  }
+
+    sleepTimeSubmitHandler = event => {
     event.preventDefault()
     const endpoint = 'https://lambda-sleep-tracker.herokuapp.com/api/users/sleeps'
 
@@ -163,34 +156,13 @@ class App extends React.Component {
           })
         .catch(err => console.log(err))
         // console.log('success')
+      this.displayUserSleep();
     }
 
     else console.log('condition not met')
   };
 
-  componentDidMount() {
-    this.getSleepData();
-  }
 
-  getSleepData = event => {
-    const endpoint = 'https://lambda-sleep-tracker.herokuapp.com/api/users/sleeps'
-    axios
-      .get(endpoint)
-      .then(res => this.setState({sleepdata: res.data}), console.log(this.state.sleepdata))
-      .catch(err => console.log(err));
-      console.log(this.state.sleepdata)
-  }
-
-  getSleeps = (event) => {
-    event.preventDefault()
-    this.displayUserSleep();
-  }
-
-  displayUserSleep = () => {
-    console.log(this.state.sleepdata.filter(data => data.user_id === this.state.userId));
-    
-  }
-  
   render() {
     if (this.state.isLoggedIn) {
       return (
@@ -227,7 +199,7 @@ class App extends React.Component {
             exact
             path="/stats"
             render={props => (
-              <Stats {...props} userName={this.state.user.username} />
+              <Stats {...props} userName={this.state.user.username} getSleeps={this.getSleeps} userSleepData={this.state.userSleepData} />
             )}
           />
           <Route exact path="/about" component={About} />
