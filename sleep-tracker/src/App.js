@@ -8,7 +8,7 @@ import axios from "axios";
 import moment from "moment";
 import { Route } from "react-router-dom";
 import About from "./components/About";
-import { withRouter } from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 class App extends React.Component {
   state = {
@@ -26,10 +26,6 @@ class App extends React.Component {
       date: null
     },
     sleepdata: {
-    },
-    userSleepData: {
-
-    },
       
     }
   };
@@ -45,7 +41,7 @@ class App extends React.Component {
   //       event.preventDefault();
   //       let userData = localStorage.getItem('userData');
   //       const { email, password } = userData;
-
+    
   //       try {
   //         const result = await axios.post(
   //           "https://lambda-sleep-tracker.herokuapp.com/api/auth/login",
@@ -75,8 +71,8 @@ class App extends React.Component {
         user: {
           ...this.state.user,
           [event.target.name]: event.target.value,
-        }
-      });
+      }
+    });
   };
 
   handleRegistrationSubmit = event => {
@@ -109,7 +105,7 @@ class App extends React.Component {
       JSON.parse(userData);
       // console.log(userData['email'])
       localStorage.setItem("token", token);
-      this.setState({ isLoggedIn: true, userId: result.data.userId });
+      this.setState({isLoggedIn:true, userId: result.data.userId});
       this.props.history.push('/login')
       // this.props.history.push('/users');
     } catch (err) {
@@ -125,14 +121,14 @@ class App extends React.Component {
   getBedTime = () => {
     let bedtime = moment().format('LLL')
     this.setState({
-      sleeptimes: { ...this.state.sleeptimes, bedtime: bedtime }
+      sleeptimes: {...this.state.sleeptimes, bedtime: bedtime}
     })
     console.log('goodnight at ' + bedtime)
   }
   getWakeTime = () => {
     let waketime = moment().format('LLL')
     this.setState({
-      sleeptimes: { ...this.state.sleeptimes, waketime: waketime }
+      sleeptimes: {...this.state.sleeptimes, waketime: waketime}
     })
     console.log('goodmorning at ' + waketime)
   }
@@ -145,52 +141,6 @@ class App extends React.Component {
           sleepquality: event.target.value,
           user_id: this.state.userId,
           date: moment().format('LL')
-        }
-      });
-    console.log(this.state.sleeptimes, 'sleep quality get')
-  }
-  
-  componentDidMount() {
-    this.getSleepData();
-  }
-
-  getSleepData = event => {
-    const endpoint = 'https://lambda-sleep-tracker.herokuapp.com/api/users/sleeps'
-    axios
-      .get(endpoint)
-      .then(res => this.setState({ sleepdata: res.data }), console.log(this.state.sleepdata))
-      .catch(err => console.log(err));
-    console.log(this.state, "this.state");
-    console.log(this.state.sleepdata, "sleepdata")
-  }
-
-  getSleeps = (event) => {
-    event.preventDefault()
-    this.displayUserSleep();
-  }
-
-  displayUserSleep = () => {
-    const userSleepData = this.state.sleepdata.filter(data => data.user_id === this.state.userId);
-    this.setState({ userSleepData: userSleepData })
-    console.log(userSleepData, "userSleepData");
-
-  }
-
-  sleepTimeSubmitHandler = event => {
-    event.preventDefault()
-    const endpoint = 'https://lambda-sleep-tracker.herokuapp.com/api/users/sleeps'
-
-    if (this.state.sleeptimes.bedtime != null && this.state.sleeptimes.waketime != null && this.state.sleeptimes.sleepquality != null) {
-      axios
-        .post(endpoint, this.state.sleeptimes)
-        .then(res => {
-          console.log(res)
-          console.log(this.state.sleeptimes, 'SLEEPTIMES')
-          console.log('BIG SUCCESS')
-        })
-        .catch(err => console.log(err))
-      // console.log('success')
-      this.displayUserSleep();
       }
     });
     console.log(this.state.sleeptimes, 'sleep quality get')
@@ -236,6 +186,7 @@ class App extends React.Component {
   displayUserSleep = () => {
     console.log(this.state.sleepdata.filter(data => data.user_id === this.state.userId));
   }
+  
   render() {
     if (this.state.isLoggedIn) {
       return (
@@ -272,7 +223,7 @@ class App extends React.Component {
             exact
             path="/stats"
             render={props => (
-              <Stats {...props} userName={this.state.user.username} getSleeps={this.getSleeps} userSleepData={this.state.userSleepData} />
+              <Stats {...props} userName={this.state.user.username} />
             )}
           />
           <Route exact path="/about" component={About} />
