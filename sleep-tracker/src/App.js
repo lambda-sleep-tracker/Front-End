@@ -98,6 +98,7 @@ class App extends React.Component {
           email,
           password
         }
+        
       );
       console.log(result);
       const token = result.data.authToken;
@@ -106,7 +107,9 @@ class App extends React.Component {
       // console.log(userData['email'])
       localStorage.setItem("token", token);
       this.setState({isLoggedIn:true, userId: result.data.userId});
-      this.props.history.push('/login')
+      // this.props.history.push('/login')
+      // this.props.userHasAuthenticated(true);
+      this.props.history.push("/home");
       // this.props.history.push('/users');
     } catch (err) {
       console.error(err);
@@ -185,6 +188,7 @@ class App extends React.Component {
 
   displayUserSleep = () => {
     console.log(this.state.sleepdata.filter(data => data.user_id === this.state.userId));
+    
   }
   
   render() {
