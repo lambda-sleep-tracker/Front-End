@@ -26,8 +26,11 @@ class App extends React.Component {
       date: null
     },
     sleepdata: {
-      
+    userSleepData: {
+
+    },      
     }
+
   };
 
   // componentDidMount(){
@@ -163,6 +166,7 @@ class App extends React.Component {
           })
         .catch(err => console.log(err))
         // console.log('success')
+        this.displayUserSleep()
     }
 
     else console.log('condition not met')
