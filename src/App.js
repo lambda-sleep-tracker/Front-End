@@ -12,7 +12,7 @@ import { withRouter } from 'react-router-dom'
 
 class App extends React.Component {
   state = {
-    isLoggedIn: true,
+    isLoggedIn: false,
     userId: null,
     user: {
       username: " ",
